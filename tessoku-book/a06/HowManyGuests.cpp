@@ -3,8 +3,8 @@
 using namespace std;
 
 int N,Q;
-int A[10009];
-int LR[100009][9];
+int A[100009];
+int L[100009], R[100009];
 
 int main(){
     cin>>N>>Q;
@@ -12,17 +12,15 @@ int main(){
         cin>>A[i];
     }
     for (int i=1;i<=Q;i++){
-        cin>>LR[i][1]>>LR[i][2];
+        cin>>L[i]>>R[i];
     }
-    int total[10009];
-    for (int i=1;i<=N;i++){
-        if (i==1) total[1]=A[1];
-        else{
-            total[i]=total[i-1]+A[i];
-        }
+    int total[100009];
+    total[0]=0;
+    for(int i=1;i<=N;i++){
+        total[i]=total[i-1]+A[i];
     }
     for (int i=1;i<=Q;i++){
-        cout<<total[LR[i][2]-LR[i][1]]<<endl;
+        cout<<total[R[i]]-total[L[i]-1]<<endl;  //L[i]-1!!
     }
     return 0;
 }
